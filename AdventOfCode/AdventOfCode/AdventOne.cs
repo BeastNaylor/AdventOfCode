@@ -13,73 +13,86 @@ namespace AdventOfCode
             Console.WriteLine("Running Advent One");
             var instructions = Properties.Resources.AdventOne;
 
-            //start at 0,0 for North and East directions
-            //keep track of which direction facing
-            //add/subtract from relevant figure as appropriate
-
-            int northDistance = 0;
-            int eastDistance = 0;
-            Direction dir = Direction.North;
-            Console.WriteLine(String.Format("Start Facing {0} at N{1}E{2}", dir, northDistance, eastDistance));
+            var routeManager = new RouteManager(0, 0);
             foreach (string movement in instructions.Split(','))
             {
-
-                var trimmedMovement = movement.Trim();
-                Console.WriteLine(trimmedMovement);
-                //trim first letter for the direction to turn in, and cast the rest to an int
-                var turnDirection = trimmedMovement.Substring(0, 1);
-                int distance = Int32.Parse(trimmedMovement.Substring(1, trimmedMovement.Length - 1));
-
-                dir = changeDirection(dir, turnDirection);
-                Console.WriteLine(String.Format("Moving {0} {1} spaces", dir, distance));
-                switch (dir)
-                {
-                    case Direction.North:
-                        northDistance += distance;
-                        break;
-                    case Direction.East:
-                        eastDistance += distance;
-                        break;
-                    case Direction.South:
-                        northDistance -= distance;
-                        break;
-                    case Direction.West:
-                        eastDistance -= distance;
-                        break;
-                }
-                Console.WriteLine(String.Format("Currently at N{0} E{1}", northDistance, eastDistance));
+                Console.WriteLine(movement);
+                routeManager.NewDirection(movement.Trim());
+                routeManager.OutputLocation();
             }
-            int totalDistance = Math.Abs(northDistance) + Math.Abs(eastDistance);
-            Console.WriteLine(String.Format("Final Position N{0}E{1}, total distance {2}", northDistance, eastDistance, totalDistance));
+            routeManager.OutputDisplacement();
         }
 
-        private static Direction changeDirection(Direction currentDir, string turnDirection) 
+        private class RouteManager
         {
-            //use MOD 4 to spin through the different directions (R turn addition, L turn subtraction)
-            int newDirectionInt = 0;
-            int oldDirectionInt = (int)currentDir;
-            //get rid of 0, so we don't have to deal with negatives
-            if (oldDirectionInt == 0) { oldDirectionInt = 4; }
-            switch (turnDirection)
+
+            private int _northCoord = 0;
+            private int _eastCoord = 0;
+            private Direction _direction = Direction.North;
+
+            public RouteManager(int northCoord, int eastCoord)
             {
-                case "L":
-                    newDirectionInt = oldDirectionInt - 1;
-                    break;
-                case "R":
-                    newDirectionInt = oldDirectionInt + 1;
-                    break;
+                _northCoord = northCoord;
+                _eastCoord = eastCoord;
+                OutputLocation();
             }
-            //can do MOD division to get back within our range
-            newDirectionInt = (newDirectionInt % 4);
-            return (Direction)newDirectionInt;
-        }
 
-        private enum Direction
-        {
-            North = 0,
-            East = 1,
-            South = 2,
-            West = 3
+            public void NewDirection(string direction)
+            {
+                //get the first part of the instructions and turn the direction
+                var turnDirection = direction.Substring(0, 1);
+                changeDirection(turnDirection);
+                //get the distance we are travelling in this new direction
+                int displacement = Int32.Parse(direction.Substring(1, direction.Length - 1));
+                move(displacement);
+            }
+
+            private void changeDirection(string turnDirection)
+            {
+                int oldDirectionInt = (int)_direction;
+                int change = ((turnDirection == "R") ? 1 : -1);
+                //get rid of 0, so we don't have to deal with negatives
+                if (oldDirectionInt == 0) { oldDirectionInt = 4; }
+                //change the direction and MOD division to get back within our range
+                int newDirectionInt = ((oldDirectionInt += change) % 4); ;
+                _direction = (Direction)newDirectionInt;
+                Console.WriteLine(String.Format("Now facing {0}", _direction));
+            }
+
+            private void move(int displacement)
+            {
+                //if we are going north or east, it is a positive change, otherwise we need to subtract
+                int directionModifier = ((_direction == Direction.North || _direction == Direction.East) ? 1 : -1);
+                int directionalDisplacement = directionModifier * displacement;
+                //if moving north or south, change NC, otherwise changing the EC
+                if (_direction == Direction.North || _direction == Direction.South)
+                {
+                    _northCoord += directionalDisplacement;
+                }
+                else
+                {
+                    _eastCoord += directionalDisplacement;
+                }
+            }
+
+
+            internal void OutputLocation()
+            {
+                Console.WriteLine(String.Format("Current Position {0}{1}", _northCoord, _eastCoord));
+            }
+
+            internal void OutputDisplacement()
+            {
+                Console.WriteLine(String.Format("Currently {0} away from origin", Math.Abs(_northCoord) + Math.Abs(_eastCoord)));
+            }
+
+            private enum Direction
+            {
+                North = 0,
+                East = 1,
+                South = 2,
+                West = 3
+            }
         }
     }
 }
