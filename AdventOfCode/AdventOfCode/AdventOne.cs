@@ -21,6 +21,7 @@ namespace AdventOfCode
                 routeManager.OutputLocation();
             }
             routeManager.OutputDisplacement();
+            routeManager.OutputFirstIntersection();
         }
 
         private class RouteManager
@@ -29,12 +30,16 @@ namespace AdventOfCode
             private int _northCoord = 0;
             private int _eastCoord = 0;
             private Direction _direction = Direction.North;
+            private List<Tuple<int, int>> _locations;
+            private List<Tuple<int, int>> _intersections;
 
             public RouteManager(int northCoord, int eastCoord)
             {
                 _northCoord = northCoord;
                 _eastCoord = eastCoord;
                 OutputLocation();
+                _locations = new List<Tuple<int, int>>(){new Tuple<int, int>(_northCoord, _eastCoord)};
+                _intersections = new List<Tuple<int, int>>();
             }
 
             public void NewDirection(string direction)
@@ -67,23 +72,63 @@ namespace AdventOfCode
                 //if moving north or south, change NC, otherwise changing the EC
                 if (_direction == Direction.North || _direction == Direction.South)
                 {
-                    _northCoord += directionalDisplacement;
+                    recordLocations(_northCoord, directionalDisplacement, directionModifier, Direction.North);
                 }
                 else
                 {
-                    _eastCoord += directionalDisplacement;
+                    recordLocations(_eastCoord, directionalDisplacement, directionModifier, Direction.East);
                 }
+            }
+
+            private void recordLocations(int origPos, int movement, int step, Direction axis)
+            {
+                //keep track of the newPos we are moving along
+                var newPos = origPos;
+                do
+                {
+                    //move along the axis
+                    newPos += step;
+
+                    Tuple<int, int> tuple = null;
+                    if (axis == Direction.North)
+                    {
+                        _northCoord = newPos;
+
+                    }
+                    else if (axis == Direction.East)
+                    {
+                        _eastCoord = newPos;
+                    }
+                    tuple = new Tuple<int, int>(_northCoord, _eastCoord);
+                    //check if the locations contains this new location
+                    if (_locations.Contains(tuple))
+                    {
+                        Console.WriteLine(String.Format("This Location has already been visited N{0}E{1}", _northCoord, _eastCoord));
+                        _intersections.Add(tuple);
+                    }
+                    else
+                    {
+                        _locations.Add(tuple);
+                    }
+                //keep moving until we are are the original + movement position
+                } while (newPos != (origPos + movement));
             }
 
 
             internal void OutputLocation()
             {
-                Console.WriteLine(String.Format("Current Position {0}{1}", _northCoord, _eastCoord));
+                Console.WriteLine(String.Format("Current Position N{0}E{1}", _northCoord, _eastCoord));
             }
 
             internal void OutputDisplacement()
             {
                 Console.WriteLine(String.Format("Currently {0} away from origin", Math.Abs(_northCoord) + Math.Abs(_eastCoord)));
+            }
+
+            internal void OutputFirstIntersection()
+            {
+                var firstIntersection = _intersections.First();
+                Console.Write(String.Format("First Intersection at N{0}E{1} was {2} away from origin", firstIntersection.Item1, firstIntersection.Item2, Math.Abs(firstIntersection.Item1) + Math.Abs(firstIntersection.Item2)));
             }
 
             private enum Direction
