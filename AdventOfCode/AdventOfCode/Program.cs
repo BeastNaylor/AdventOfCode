@@ -10,7 +10,8 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            AdventOne.Run();
+            //AdventOne.Run();
+            AdventTwo.Run();
             Console.ReadLine();
         }
     }
