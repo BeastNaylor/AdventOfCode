@@ -61,6 +61,39 @@ namespace AdventOfCode.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to vxupkizork-sgmtkzoi-pkrrehkgt-zxgototm-644[kotgr]
+        ///mbiyqoxsm-pvygob-nocsqx-900[obmqs]
+        ///veqtekmrk-ikk-hitpscqirx-334[nrtws]
+        ///gvcskirmg-fyrrc-irkmriivmrk-932[rikmc]
+        ///xmtjbzidx-xviyt-yzqzgjkhzio-187[yzfeu]
+        ///bwx-amkzmb-kivlg-kwibqvo-lmaqov-798[bkmva]
+        ///vcibutulxiom-ohmnuvfy-yaa-mylpcwym-890[iyaun]
+        ///ajvyjprwp-lqxlxujcn-jwjuhbrb-251[muivb]
+        ///szfyrqriuflj-avccpsvre-kirzezex-971[rezcf]
+        ///kwvacumz-ozilm-akidmvomz-pcvb-uizsmbqvo-590[uslyz]
+        ///ucynmlgxcb-afmamjyrc-jmegqrgaq-626[rybxt]
+        ///oaxadrgx-pkq-abqdmfuaze-872[xtbnw]
+        ///t [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AdventFour {
+            get {
+                return ResourceManager.GetString("AdventFour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to aaaaa-bbb-z-y-x-123[abxyz]
+        ///a-b-c-d-e-f-g-h-987[abcde]
+        ///not-a-real-room-404[oarel]
+        ///totally-real-room-200[decoy].
+        /// </summary>
+        internal static string AdventFourTest {
+            get {
+                return ResourceManager.GetString("AdventFourTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to R2, L5, L4, L5, R4, R1, L4, R5, R3, R1, L1, L1, R4, L4, L1, R4, L4, R4, L3, R5, R4, R1, R3, L1, L1, R1, L2, R5, L4, L3, R1, L2, L2, R192, L3, R5, R48, R5, L2, R76, R4, R2, R1, L1, L5, L1, R185, L5, L1, R5, L4, R1, R3, L4, L3, R1, L5, R4, L4, R4, R5, L3, L1, L2, L4, L3, L4, R2, R2, L3, L5, R2, R5, L1, R1, L3, L5, L3, R4, L4, R3, L1, R5, L3, R2, R4, R2, L1, R3, L1, L3, L5, R4, R5, R2, R2, L5, L3, L1, L1, L5, L2, L3, R3, R3, L3, L4, L5, R2, L1, R1, R3, R4, L2, R1, L1, R3, R3, L4, L2, R5, R5, L1, R4, L5, L5, R1 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AdventOne {
