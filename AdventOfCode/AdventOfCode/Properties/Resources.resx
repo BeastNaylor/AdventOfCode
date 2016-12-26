@@ -127,6 +127,9 @@
   <data name="AdventOne" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AdventOne.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="AdventSix" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AdventSix.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="AdventThree" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AdventThree.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>

@@ -103,6 +103,66 @@ namespace AdventOfCode.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to bztzdacg
+        ///xyjtwqap
+        ///arsiwubu
+        ///cjwvfwtp
+        ///dpdymenf
+        ///kbedgnri
+        ///gsrrprxn
+        ///ojdxafjb
+        ///umujtcwg
+        ///fcpqbkti
+        ///hfhxzhdt
+        ///oradqnqo
+        ///pjfgpkgz
+        ///fagrqjrn
+        ///xjkujuks
+        ///iisbsyvl
+        ///narthccx
+        ///sjbnbbxp
+        ///ljaemgip
+        ///sdlenzfu
+        ///zhzlsmgw
+        ///sbdndyku
+        ///ekcktelc
+        ///vxgoapax
+        ///bhepszpx
+        ///hozlfbdm
+        ///fkjgygrj
+        ///keutuund
+        ///agzrwrzb
+        ///mgcucvkn
+        ///wiguuvtm
+        ///bnyviixq
+        ///ybsozbss
+        ///cxaqckwv
+        ///ulnksnjj
+        ///dsrvvmbs
+        ///azfnwcdk
+        ///hwtwbilm
+        ///lieglyxh
+        ///vpqfjxcv
+        ///sfwxiyqr
+        ///hqifjldw
+        ///icnsplkz
+        ///oxnqizfs
+        ///nzfwhwyu
+        ///ygaoadfd
+        ///dctauvvs
+        ///zmtgvtxg
+        ///wwzpvoym
+        ///cwhcqxvu
+        ///rmcvjkzu
+        ///yh [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AdventSix {
+            get {
+                return ResourceManager.GetString("AdventSix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to     4   21  894
         ///  419  794  987
         ///  424  797  125
