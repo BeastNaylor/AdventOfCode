@@ -1,17 +1,18 @@
-﻿using System;
+﻿using AdventOfCode.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventOfCode
+namespace AdventOfCode._2016
 {
-    class AdventOne
+    class Day1 : DayProgram
     {
-        public static void Run()
+        public override void Run(string part)
         {
             Console.WriteLine("Running Advent One");
-            var instructions = Properties.Resources.AdventOne;
+            var instructions = FileReader.ReadFile(2016, 1);
 
             var routeManager = new RouteManager(0, 0);
             foreach (string movement in instructions.Split(','))

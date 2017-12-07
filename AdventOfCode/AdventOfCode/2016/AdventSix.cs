@@ -10,10 +10,11 @@ namespace AdventOfCode
     {
         public static void Run()
         {
-            var codes = Properties.Resources.AdventSix;
+            var codes = "";
             //for each code, take out each of the letters and save them into their respective arrays
             var codeManager = new CodeManager();
             var managerInitialised = false;
+            var total = 0;
             foreach (string code in codes.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
             {
                 var positions = code.Length;
@@ -27,6 +28,7 @@ namespace AdventOfCode
                     var letter = code[index];
                     codeManager.AddLetter(index,letter);
                 }
+                total++;
             }
             //once we have all the codes split out, we want to get the most common in each position
             Console.WriteLine(String.Format("The most common letters are {0}", codeManager.GetOrderOfLetters(false)));

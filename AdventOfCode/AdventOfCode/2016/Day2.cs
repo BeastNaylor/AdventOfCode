@@ -1,17 +1,18 @@
-﻿using System;
+﻿using AdventOfCode.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventOfCode
+namespace AdventOfCode._2016
 {
-    class AdventTwo
+    class Day2 : DayProgram
     {
-        public static void Run()
+        public override void Run(string part)
         {
-            var instructions = Properties.Resources.AdventTwo;
-            var numPad = new NumPadManager("B");
+            var instructions = FileReader.ReadFile(2016,2);
+            var numPad = new NumPadManager(part);
             numPad.OutputCurrentPosition();
             foreach (string row in instructions.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
             {

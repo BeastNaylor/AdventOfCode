@@ -1,17 +1,18 @@
-﻿using System;
+﻿using AdventOfCode.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace AdventOfCode
+namespace AdventOfCode._2016
 {
-    class AdventFour
+    class Day4 : DayProgram
     {
-        public static void Run()
+        public override void Run(string part)
         {
-            var rooms = Properties.Resources.AdventFour;
+            var rooms = FileReader.ReadFile(2016,4);
             var totalRoomID = 0;
             foreach (string fullRoom in rooms.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
             {

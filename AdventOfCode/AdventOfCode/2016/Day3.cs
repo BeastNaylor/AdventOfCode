@@ -1,18 +1,30 @@
-﻿using System;
+﻿using AdventOfCode.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventOfCode
+namespace AdventOfCode._2016
 {
-    class AdventThree
+    class Day3 : DayProgram
     {
-        public static void Run()
+        public override void Run(string part)
         {
-            var instructions = Properties.Resources.AdventThree;
+            var input = FileReader.ReadFile(2016, 3);
+            if (part == "A")
+            {
+                RunRowTriangles(input);
+            } else if (part == "B")
+            {
+                RunColumnTriangle(input);
+            }
+        }
+
+        public static void RunRowTriangles(string input)
+        {
             var validTriangles = 0;
-            foreach (string set in instructions.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
+            foreach (string set in input.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
             {
                 //for each line of the file, we need to get all the triangle edges, and sum the two smallest and compare to the longest
                 var lEdges = new List<int>();
@@ -27,9 +39,8 @@ namespace AdventOfCode
             Console.WriteLine(String.Format("{0} Valid Triangles", validTriangles));
         }
 
-        public static void RunTwo()
+        public static void RunColumnTriangle(string input)
         {
-            var instructions = Properties.Resources.AdventThree;
             var validTriangles = 0;
             var triangles = 0;
             var columns = new Dictionary<int, Dictionary<int, int>>();
@@ -38,7 +49,7 @@ namespace AdventOfCode
                 columns.Add(ii, new Dictionary<int, int>());
             }
             var rowCount = 1;
-            foreach (string set in instructions.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
+            foreach (string set in input.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
             {
                 var columnCount = 1;
                 var columnRows = new Dictionary<int, int>();
