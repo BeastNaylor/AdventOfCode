@@ -53,11 +53,16 @@
     <Compile Include="2016\AdventSix.cs" />
     <Compile Include="2016\Day3.cs" />
     <Compile Include="2016\Day2.cs" />
+    <Compile Include="2017\Day10.cs" />
+    <Compile Include="2017\Day11.cs" />
     <Compile Include="2017\Day2.cs" />
     <Compile Include="2017\Day3.cs" />
     <Compile Include="2017\Day4.cs" />
     <Compile Include="2017\Day5.cs" />
     <Compile Include="2017\Day6.cs" />
+    <Compile Include="2017\Day7.cs" />
+    <Compile Include="2017\Day8.cs" />
+    <Compile Include="2017\Day9.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -102,10 +107,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="2017\Data\Day1.txt" />
+    <Content Include="2017\Data\Day10.txt" />
+    <Content Include="2017\Data\Day11.txt" />
     <Content Include="2017\Data\Day2.txt" />
     <Content Include="2017\Data\Day4.txt" />
     <Content Include="2017\Data\Day5.txt" />
     <Content Include="2017\Data\Day6.txt" />
+    <Content Include="2017\Data\Day7.txt" />
+    <Content Include="2017\Data\Day8.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
