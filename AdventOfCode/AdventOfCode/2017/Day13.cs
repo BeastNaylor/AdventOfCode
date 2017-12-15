@@ -13,32 +13,27 @@ namespace AdventOfCode._2017
         public override void Run(string part)
         {
             var input = FileReader.ReadFile(2017, 13);
-
+            var ss = new SecuritySystem(input);
             if (part == "A")
             {
-                var ss = new SecuritySystem(input);
-                ss.SetPacket(0);
-                ss.TraversePacket();
-                Console.Write(ss.Severity);
+                Console.WriteLine(ss.CalculateSeverity(0).Severity);
             }
             else
             {
                 var delay = 0;
-                var severity = 0;
+                ScanResults result;
                 do
                 {
                     delay++;
-                    var ss = new SecuritySystem(input);
-                    ss.SetPacket(delay);
-                } while (severity == 0);
-                Console.Write(delay);
+                    result = ss.CalculateSeverity(delay, true);
+                } while (result.Caught);
+                Console.WriteLine(delay);
             }
         }
 
         private class SecuritySystem
         {
-            Dictionary<int, SecurityScanner> _scanners = new Dictionary<int, SecurityScanner>();
-            private int _packetDepth = 0;
+            Dictionary<int, int> _scanners = new Dictionary<int, int>();
             private int _severity = 0;
 
             public int Severity { get { return _severity; } }
@@ -50,72 +45,35 @@ namespace AdventOfCode._2017
                     var regEx = @"(\d+): (\d+)";
                     var matches = Regex.Match(line, regEx);
                     var position = matches.Groups[1].Value;
-                    var scanner = new SecurityScanner(int.Parse(matches.Groups[2].Value));
-                    _scanners.Add(int.Parse(position), scanner);
+                    _scanners.Add(int.Parse(position), int.Parse(matches.Groups[2].Value));
                 }
             }
 
-            public void SetPacket(int delay)
+            public ScanResults CalculateSeverity(int delay, bool CantBeCaught = false)
             {
-                for(int ii = 1; ii < delay; ii++) {
-                    this.Tick();
-                }
-            }
-
-            public void TraversePacket()
-            {
-                //keep ticking until the packet makes it past the last scanner
-                while (_packetDepth < _scanners.Keys.Max())
+                var results = new ScanResults() { Caught = false, Severity = 0 };
+                foreach (KeyValuePair<int, int> scanner in _scanners)
                 {
-                    Tick();
-                }
-            }
-
-            private void Tick()
-            {
-                //tick all the security scanners
-                foreach (SecurityScanner scanner in _scanners.Values)
-                {
-                    scanner.Tick();
-                }
-                //then tick the packet and check if there is a scanner at this depth
-                _packetDepth++;
-                if (_scanners.ContainsKey(_packetDepth))
-                {
-                    //if there is, check if the scanner is at 0
-                    if (_scanners[_packetDepth].Position == 0)
+                    //add the delay to the index of the scanner to determine to time taken to reach it
+                    var timeTaken = scanner.Key + delay;
+                    //find how long it takes the scanner to reach back to zero
+                    var scannerReturnTime = (scanner.Value - 1) * 2;
+                    //the position as the packet arrives is then
+                    var positionDuringPacket = timeTaken % scannerReturnTime;
+                    if (positionDuringPacket == 0)
                     {
-                        _severity += (_scanners[_packetDepth].Size * _packetDepth);
+                        results.Caught = true;
+                        results.Severity += scanner.Key * scanner.Value;
+                        if (CantBeCaught) { break; }
                     }
                 }
+                return results;
             }
         }
-
-        private class SecurityScanner
+        private struct ScanResults
         {
-            private int _size;
-            private int _position = 0;
-            private int _direction = 1;
-            public SecurityScanner(int size)
-            {
-                _size = size;
-            }
-
-            public int Position
-            {
-                get { return _position; }
-            }
-            public int Size
-            {
-                get { return _size; }
-            }
-
-            public void Tick()
-            {
-                _position += _direction;
-                if (_position == 0) { _direction = 1; }
-                if (_position == _size - 1) { _direction = -1; }
-            }
+            public bool Caught;
+            public int Severity;
         }
     }
 }
