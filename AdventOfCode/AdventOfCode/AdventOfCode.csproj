@@ -56,6 +56,8 @@
     <Compile Include="2017\Day10.cs" />
     <Compile Include="2017\Day11.cs" />
     <Compile Include="2017\Day12.cs" />
+    <Compile Include="2017\Day13.cs" />
+    <Compile Include="2017\Day14.cs" />
     <Compile Include="2017\Day2.cs" />
     <Compile Include="2017\Day3.cs" />
     <Compile Include="2017\Day4.cs" />
@@ -111,6 +113,7 @@
     <Content Include="2017\Data\Day10.txt" />
     <Content Include="2017\Data\Day11.txt" />
     <Content Include="2017\Data\Day12.txt" />
+    <Content Include="2017\Data\Day13.txt" />
     <Content Include="2017\Data\Day2.txt" />
     <Content Include="2017\Data\Day4.txt" />
     <Content Include="2017\Data\Day5.txt" />
