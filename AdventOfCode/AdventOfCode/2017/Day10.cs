@@ -12,48 +12,66 @@ namespace AdventOfCode._2017
         public override void Run(string part)
         {
             var input = FileReader.ReadFile(2017, 10);
-            if (part == "A") {
+            if (part == "A")
+            {
                 var kt = new KnotTier(input, 256);
                 kt.TieKnots();
                 Console.WriteLine(kt.ProductOfFirstTwoElements);
             }
             else if (part == "B")
             {
-                input = ConvertForPartB(input);
+                var kt = new CompleteKnotTier(input);
+                Console.Write(kt.Run());
+            }
+
+        }
+
+        public class CompleteKnotTier
+        {
+            private string _ascii = "";
+
+            public CompleteKnotTier(string input)
+            {
+                _ascii = ConvertForPartB(input);
+            }
+
+            public string Run()
+            {
                 //need to tie the knots 64 times, preserving the skip/currentLocation
-                var kt = new KnotTier(input, 256);
+                var kt = new KnotTier(_ascii, 256);
                 for (int ii = 0; ii <= 63; ii++)
                 {
                     kt.TieKnots();
                 }
                 var denseHash = kt.GetDenseHash;
-                Console.Write(ConvertDenseHashToString(denseHash));
+                return ConvertDenseHashToString(denseHash);
             }
 
-        }
-
-        public string ConvertForPartB(string input) {
-            //foreach character we have in the string, convert to Ascii format
-            StringBuilder asciiString = new StringBuilder();
-            foreach (char c in input)
+            private string ConvertForPartB(string input)
             {
-                var asciiCode = (int)c;
-                asciiString.Append(asciiCode);
-                asciiString.Append(",");
+                //foreach character we have in the string, convert to Ascii format
+                StringBuilder asciiString = new StringBuilder();
+                foreach (char c in input)
+                {
+                    var asciiCode = (int)c;
+                    asciiString.Append(asciiCode);
+                    asciiString.Append(",");
+                }
+                asciiString.Append("17, 31, 73, 47, 23");
+                return asciiString.ToString();
             }
-            asciiString.Append("17, 31, 73, 47, 23");
-            return asciiString.ToString();
+
+            private string ConvertDenseHashToString(List<int> denseHash)
+            {
+                var hashString = "";
+                foreach (int code in denseHash)
+                {
+                    hashString += code.ToString("X2");
+                }
+                return hashString;
+            }
         }
 
-        public string ConvertDenseHashToString(List<int> denseHash)
-        {
-            var hashString = "";
-            foreach (int code in denseHash)
-            {
-                hashString += code.ToString("X2");
-            }
-            return hashString;
-        }
 
         private class KnotTier
         {
@@ -76,7 +94,7 @@ namespace AdventOfCode._2017
                 {
                     var denseHash = new List<int>();
                     //loop through the elements in sets of 16, performing a bitwise XOR on them all
-                    for (int ii = 0; ii <= 15; ii++ )
+                    for (int ii = 0; ii <= 15; ii++)
                     {
                         //XOR 0 gives the original nunber, so a perfect starting point
                         var combinedValue = 0;
@@ -84,8 +102,7 @@ namespace AdventOfCode._2017
                         for (int jj = 0; jj <= 15; jj++)
                         {
                             //find the element we want
-                            var index = (ii * 16)+ jj;
-                            Console.WriteLine(index);
+                            var index = (ii * 16) + jj;
                             combinedValue = combinedValue ^ _elements[index];
                         }
                         denseHash.Add(combinedValue);
@@ -97,8 +114,9 @@ namespace AdventOfCode._2017
             public KnotTier(string input, int numElements)
             {
                 _elements = new Dictionary<int, int>();
-                for(int ii = 0; ii <= numElements-1; ii++) {
-                    _elements.Add(ii,ii);
+                for (int ii = 0; ii <= numElements - 1; ii++)
+                {
+                    _elements.Add(ii, ii);
                 }
                 _lengths = input.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToList();
             }
