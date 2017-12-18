@@ -71,7 +71,7 @@ namespace AdventOfCode._2017
                             break;
                         case "rcv":
                             //check if this register is non-zero, if it is, set recovered to the last sound
-                            if (_registers.ContainsKey(val2) && _registers[val2] > 0)
+                            if (_registers.ContainsKey(val2) && _registers[val2] != 0)
                             {
                                 recoveredSound = currentSound;
                             }
@@ -96,18 +96,16 @@ namespace AdventOfCode._2017
                 return recoveredSound;
             }
 
-            private int checkRegisterForValues(string key) {
+            private int checkRegisterForValues(string key)
+            {
                 int value = 0;
-                if (!string.IsNullOrEmpty(key))
+                if (_registers.ContainsKey(key))
                 {
-                    if (_registers.ContainsKey(key))
-                    {
-                        value = _registers[key];
-                    }
-                    else
-                    {
-                        value = int.Parse(key);
-                    }
+                    value = _registers[key];
+                }
+                else
+                {
+                    value = int.Parse(key);
                 }
                 return value;
             }
