@@ -20,7 +20,7 @@ namespace AdventOfCode._2017
         private class SoundEngine
         {
             private List<string> _instructions = new List<string>();
-            private Dictionary<string, int> _registers = new Dictionary<string, int>();
+            private Dictionary<string, long> _registers = new Dictionary<string, long>();
             public SoundEngine(string input)
             {
                 foreach (string line in input.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
@@ -29,11 +29,11 @@ namespace AdventOfCode._2017
                 }
             }
 
-            public int DetermineFirstSound()
+            public long DetermineFirstSound()
             {
-                var recoveredSound = 0;
-                var instructionPointer = 0;
-                var currentSound = 0;
+                long recoveredSound = 0;
+                int instructionPointer = 0;
+                long currentSound = 0;
                 while (recoveredSound == 0)
                 {
                     var instruction = _instructions[instructionPointer];
@@ -81,7 +81,7 @@ namespace AdventOfCode._2017
                             if (checkRegisterForValues(val2) > 0)
                             {
                                 var offset = checkRegisterForValues(val3);
-                                instructionPointer = instructionPointer + offset;
+                                instructionPointer = instructionPointer + (int)offset;
                                 //need to subrtract one from the pointer, as it will automatically increment by one at the end
                                 instructionPointer--;
                             }
@@ -96,9 +96,9 @@ namespace AdventOfCode._2017
                 return recoveredSound;
             }
 
-            private int checkRegisterForValues(string key)
+            private long checkRegisterForValues(string key)
             {
-                int value = 0;
+                long value = 0;
                 if (_registers.ContainsKey(key))
                 {
                     value = _registers[key];
