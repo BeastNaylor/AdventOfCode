@@ -10,7 +10,7 @@ namespace AdventOfCode.Utils
     {
         public static string ReadFile(int year, int day)
         {
-            string text = System.IO.File.ReadAllText(String.Format(@"C:\src\AdventOfCode\AdventOfCode\AdventOfCode\{0}\Data\Day{1}.txt", year, day));
+            string text = System.IO.File.ReadAllText(String.Format(@"C:\Users\Ryan\source\repos\AdventOfCode\AdventOfCode\AdventOfCode\{0}\Data\Day{1}.txt", year, day));
             return text;
         }
     }
